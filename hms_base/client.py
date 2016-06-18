@@ -133,17 +133,3 @@ class Client:
                 }
 
                 self.publish('ping', resp)
-
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-
-    c = Client('test', 'haum', ['test'])
-    c.connect()
-
-    try:
-        c.start_consuming()
-    except KeyboardInterrupt:
-        get_logger().critical("Got a KeyboardInterrupt")
-        c.stop_consuming()
-        c.disconnect()
