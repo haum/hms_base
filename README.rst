@@ -24,4 +24,6 @@ you can register it as a dependency for microservices your create.
 
 Be sure to respect semantic versionning for non-breaking changes:
 
+::
+
     hms_base>=1.0,<2
