@@ -1,5 +1,8 @@
 
 class topic:
+
+    """Decorator that subscribe to only one topic and ignore rest."""
+
     def __init__(self, topic):
         self.topic = topic
 
