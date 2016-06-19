@@ -8,5 +8,6 @@ setup(
     license='MIT',
     author='Romain Porte (microjoe)',
     author_email='microjoe@microjoe.org',
-    description='Base package for HAUM micro-services'
+    description='Base package for HAUM micro-services',
+    install_requires=['pika']
 )
