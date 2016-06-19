@@ -22,8 +22,14 @@ Installing
 hms_base is `available on PyPI <https://pypi.python.org/pypi/hms_base>`_ so
 you can register it as a dependency for microservices your create.
 
-Be sure to respect semantic versionning for non-breaking changes:
+Be sure to respect semantic versioning for non-breaking changes:
 
 ::
 
     hms_base>=1.0,<2
+
+License
+-------
+
+This project is brought to you under MIT license. For further information,
+please read the provided ``LICENSE.txt`` file.
