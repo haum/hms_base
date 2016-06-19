@@ -1,5 +1,5 @@
 
-class singleTopicListener:
+class topic:
     def __init__(self, topic):
         self.topic = topic
 

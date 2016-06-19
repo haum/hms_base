@@ -1,10 +1,10 @@
 from unittest import TestCase
 
-from hms_base.decorators import singleTopicListener
+from hms_base.decorators import topic
 
-class TestSingleTopicListener(TestCase):
+class TestTopic(TestCase):
     def setUp(self):
-        @singleTopicListener('bla')
+        @topic('bla')
         def listener(client, topic, dct):
             return 42
 

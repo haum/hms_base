@@ -3,7 +3,7 @@ import json
 
 import pika
 
-from hms_base.decorators import singleTopicListener
+from hms_base.decorators import topic
 
 
 def get_logger():
@@ -132,7 +132,7 @@ class Client:
             listener(self, topic, dct)
 
     @staticmethod
-    @singleTopicListener('ping')
+    @topic('ping')
     def _handle_ping(client, topic, dct):
         """Internal method that will be called when receiving ping message."""
         if dct['type'] == 'request':
