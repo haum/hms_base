@@ -1,1 +1,4 @@
 MANIFEST
+hms_base*.tar.gz
+dist/
+__pycache__
