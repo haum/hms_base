@@ -118,25 +118,27 @@ class Client:
         get_logger().info("Disconnecting from RabbitMQ server...")
         self._conn.close()
 
-    def _callback(self, *args):
+    def _callback(self, ch, method, properties, body):
         """Internal method that will be called when receiving message."""
 
         get_logger().info("Message received! Calling listeners...")
 
-        for li in self.listeners:
-            li(*args)
+        topic = method.routing_key
+        dct = json.loads(body.decode('utf-8'))
 
-    def _handle_ping(self, ch, method, properties, body):
+        for listener in self.listeners:
+            listener(topic, dct)
+
+    def _handle_ping(self, topic, dct):
         """Internal method that will be called when receiving ping message."""
 
-        if method.routing_key == 'ping':
-            payload = json.loads(body.decode('utf-8'))
+        if topic == 'ping':
 
-            if payload['type'] == 'request':
+            if dct['type'] == 'request':
                 resp = {
                     'type': 'answer',
                     'name': self.name,
-                    'source': payload
+                    'source': dct
                 }
 
                 self.publish('ping', resp)
