@@ -15,7 +15,7 @@ setup(
     url='https://github.com/haum/hms_base',
     license='MIT',
 
-    author='Romain Porte (microjoe)',
+    author='Romain Porte (MicroJoe)',
     author_email='microjoe@microjoe.org',
 
     description='Base package for HAUM micro-services',
