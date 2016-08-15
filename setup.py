@@ -7,10 +7,9 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
-
 setup(
     name='hms_base',
-    version='1.0.1',
+    version='2.0',
     packages=['hms_base', 'hms_base.tests'],
 
     url='https://github.com/haum/hms_base',

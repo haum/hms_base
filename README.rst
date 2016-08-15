@@ -26,4 +26,4 @@ Be sure to respect semantic versionning for non-breaking changes:
 
 ::
 
-    hms_base>=1.0,<2
+    hms_base>=2.0,<3

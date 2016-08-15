@@ -13,7 +13,8 @@ def get_logger():
 class Client:
     """Overlay for easy microservices communication."""
 
-    def __init__(self, name, exchange, topics, enable_ping=True):
+    def __init__(self, name, exchange, topics=[], enable_ping=True,
+                 listen_all=False):
         """Initialize the client with connection settings.
 
         Args:
@@ -30,6 +31,7 @@ class Client:
         self.exchange = exchange
         self.topics = topics
         self.listeners = []
+        self.listen_all = listen_all
 
         if enable_ping:
             self.listeners.append(self._handle_ping)
@@ -58,10 +60,10 @@ class Client:
 
         # Exchanger
 
-        get_logger().info("Declaring direct exchanger {}...".format(
+        get_logger().info("Declaring topic exchanger {}...".format(
             self.exchange))
 
-        self._channel.exchange_declare(exchange=self.exchange, type='direct')
+        self._channel.exchange_declare(exchange=self.exchange, type='topic')
 
         # Create queue
 
@@ -72,15 +74,30 @@ class Client:
 
         # Binding
 
-        for routing_key in self.topics:
+        if self.listen_all:
             get_logger().info(
-                "Binding queue to exchanger {} with routing key {}...".format(
-                    self.exchange, routing_key))
-
+                "Binding queue to exchanger {} (listen all)...".format(
+                    self.exchange
+                )
+            )
             self._channel.queue_bind(
                 exchange=self.exchange,
                 queue=self._queue_name,
-                routing_key=routing_key)
+                routing_key='*'
+            )
+        else:
+            for routing_key in self.topics:
+                get_logger().info(
+                    "Binding queue to exchanger {} "
+                    "with routing key {}...".format(
+                        self.exchange, routing_key)
+                )
+
+                self._channel.queue_bind(
+                    exchange=self.exchange,
+                    queue=self._queue_name,
+                    routing_key=routing_key
+                )
 
         # Callback
 
