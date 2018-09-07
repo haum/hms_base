@@ -42,7 +42,7 @@ class Client:
         self._conn = None
         self._queue_name = None
 
-    def connect(self, host='localhost'):
+    def connect(self, host='localhost', user_name='', user_pass=''):
         """Connect to the server and set everything up.
 
         Args:
@@ -54,8 +54,10 @@ class Client:
 
         get_logger().info("Connecting to RabbitMQ server...")
 
+        self._credentials = pika.PlainCredentials(user_name, user_pass)
+
         self._conn = pika.BlockingConnection(
-            pika.ConnectionParameters(host=host))
+            pika.ConnectionParameters(host=host, credentials=self._credentials))
         self._channel = self._conn.channel()
 
         # Exchanger
